@@ -6,7 +6,6 @@ import com.example.gongdewapplicationmaven.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 
 @Service
@@ -14,7 +13,6 @@ import java.util.List;
 public class UserServiceImpl implements UserService{
     @Autowired
     private UserRepository userRepository;
-
     //전체 USER조회 함수
     @Override
     public List<User> getAllUsers() {
@@ -30,7 +28,6 @@ public class UserServiceImpl implements UserService{
         log.info(target.toString()); //db에 저장된 객체를 찍어보기
         return target;
     }
-
     @Override
     public User saveUser(User user) {
         userRepository.save(user);

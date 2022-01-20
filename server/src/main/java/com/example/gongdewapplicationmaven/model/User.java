@@ -29,7 +29,6 @@ public class User {
     private String userDepartment;//학과
     @Column
     private String userHabit; //취미
-
     public String getId() {
         return userID;
     }
