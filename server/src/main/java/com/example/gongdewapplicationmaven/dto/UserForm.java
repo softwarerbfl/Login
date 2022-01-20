@@ -1,31 +1,20 @@
-package com.example.gongdewapplicationmaven.model;
+package com.example.gongdewapplicationmaven.dto;
 
-
+import com.example.gongdewapplicationmaven.model.User;
 import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.ToString;
 
-import javax.persistence.*;
-
 @AllArgsConstructor
-@NoArgsConstructor
-@Entity
 @ToString
-@Getter
-public class User {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class UserForm {
     private int id;
-    @Column
     private String userID; //이메일
-    @Column
     private String userPassword;//비밀번호
-    @Column
     private String userBirth; //생일
-    @Column
     private String userDepartment;//학과
-    @Column
     private String userHabit; //취미
-
+    public User toEntity(){
+        return new User(id, userID,userPassword,userBirth,
+                userDepartment, userHabit);
+    }
 }
