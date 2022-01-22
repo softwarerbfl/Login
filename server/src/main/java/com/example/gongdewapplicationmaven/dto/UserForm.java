@@ -15,6 +15,7 @@ public class UserForm {
     private String major;//학과
     private String hobby; //취미
 
-    public User toEntity(){ return new User(null, email,password,name, birth, major, hobby);
+    public User toEntity(){
+        return new User(null, email,password,name, birth, major, hobby);
     }
 }

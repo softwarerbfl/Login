@@ -8,6 +8,7 @@ function LoginPage() {
   const [isLogin, setIsLogin] = useState(false)
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
+  const [all, setAll] = useState([])
 
   const onEmailHandler = (event) => {
     setEmail(event.currentTarget.value)
@@ -31,39 +32,43 @@ function LoginPage() {
     }
 
     // 사용자에게 받은 정보를 서버에게 보내고 로그인 성공 시 myPage 화면으로 이동
-    axios.post('/api/users/create', { email: email, password: password })
-      .then((response) => {
-        console.log(response)
-        alert('로그인에 성공했습니다.');
-        setIsLogin(true)
-      })
-      .catch(() => alert('Email과 PW를 다시 확인해주세요.'))
+    axios.post('/api/login', { email: email, password: password })
+        .then((response) => {
+          if (response.statusText === 'OK') {
+            alert('로그인에 성공했습니다.');
+            setIsLogin(true)
+            setAll(response.data)
+          } else {
+            alert('Email과 PW를 다시 확인해주세요.')
+          }
+        })
+        .catch((error) => console.log(error))
   }
 
   return (
-    <div>
-      {!isLogin ?
-        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%', height: '100vh' }}>
-          <form style={{ display: 'flex', flexDirection: 'column' }} onSubmit={onLoginSubmitHandler}>
-            <h3>Welcome to Gondew Login-App</h3><br /><br /><br /><br />
+      <div>
+        {!isLogin ?
+            <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%', height: '100vh' }}>
+              <form style={{ display: 'flex', flexDirection: 'column' }} onSubmit={onLoginSubmitHandler}>
+                <h3>Welcome to Gondew Login-App</h3><br /><br /><br /><br />
 
-            <label>Email</label>
-            <input type="email" value={email} onChange={onEmailHandler} autoFocus />
+                <label>Email</label>
+                <input type="email" value={email} onChange={onEmailHandler} autoFocus />
 
-            <label>Password</label>
-            <input type="password" value={password} onChange={onPasswordHandler} /><br />
+                <label>Password</label>
+                <input type="password" value={password} onChange={onPasswordHandler} /><br />
 
-            <button type='submit' style={{
-              margin: '10px 0', background: 'skyblue',
-              border: 0, fontSize: '15px', padding: '6px', cursor: 'pointer'
-            }}>로그인</button>
-            <Link to='/sign'>
-              <button style={{ border: 0, fontSize: '15px', padding: '6px', width: '100%', cursor: 'pointer' }}>회원가입</button>
-            </Link>
-          </form>
-        </div> : <MyPage email={email} />
-      }
-    </div>
+                <button type='submit' style={{
+                  margin: '10px 0', background: 'skyblue',
+                  border: 0, fontSize: '15px', padding: '6px', cursor: 'pointer'
+                }}>로그인</button>
+                <Link to='/sign'>
+                  <button style={{ border: 0, fontSize: '15px', padding: '6px', width: '100%', cursor: 'pointer' }}>회원가입</button>
+                </Link>
+              </form>
+            </div> : <MyPage all={all} />
+        }
+      </div>
   )
 }
 

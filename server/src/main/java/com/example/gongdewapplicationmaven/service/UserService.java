@@ -34,5 +34,13 @@ public class UserService{
         }
         return userRepository.save(user);
     }
-
+    //로그인
+    public User login(UserForm dto) {
+        User user = dto.toEntity(); //사용자가 입력한 정보를 갖는 객체
+        User login = userRepository.findByEmailAddress(user.getEmail(), user.getPassword()); //이메일을 건내서 해당 객체 반환
+        if(login==null){
+            return null;
+        }
+        return login;
+    }
 }
