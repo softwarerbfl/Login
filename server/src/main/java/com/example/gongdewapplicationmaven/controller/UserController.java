@@ -40,4 +40,10 @@ public class UserController {
                 ResponseEntity.status(HttpStatus.OK).body(login):
                 ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
     }
+    @PostMapping("/check/email")
+    public boolean duplication(@RequestBody UserForm dto){
+        User duplicated = userService.duplicate(dto);
+        return (duplicated != null) ?
+                true: false;
+    }
 }

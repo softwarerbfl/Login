@@ -43,4 +43,12 @@ public class UserService{
         }
         return login;
     }
+    public User duplicate(UserForm dto){
+        User user=dto.toEntity();
+        User check = userRepository.checkDuplicaionByEmailAddress(user.getEmail());
+        if(check==null){
+            return null;
+        }
+        return check;
+    }
 }
