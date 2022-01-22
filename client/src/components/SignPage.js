@@ -13,7 +13,7 @@ function SignPage() {
   const [birth, setBirth] = useState("")
   const [major, setMajor] = useState("")
   const [hobby, setHobby] = useState("")
-  const [Num, setNum] = useState(1) // 중복확인을 했는지 체크하는 용도인 변수
+  const [Num, setNum] = useState(0) // 중복확인을 했는지 체크하는 용도인 변수
 
   let navigate = useNavigate()
 
@@ -47,28 +47,32 @@ function SignPage() {
 
   // Email 중복확인을 하는 함수(Onclick)
   const checkEmail = (event) => {
-    event.stopPropagation();
-    console.log('checkEmail 실행 중')
-
+    event.preventDefault();
+    console.log('checkEmail 실행')
 
     axios.post('/api/check/email', {email: email})
         .then((response) => {
-          if (response.data === true) {
+          if (response.data === false) {
             alert('사용가능한 Email입니다.');
-            setNum(0)
+            setNum(1)
+            console.log(setNum)
           } else {
             alert('이미 사용중인 Email입니다.');
-            setNum(1)
+            setNum(2)
           }
         })
         .catch((error) => console.log(error))
   }
 
   const OnSignSubmitHandler = (event) => {
-    event.stopPropagation();
-    console.log('OnSignSubmitHandler 실행 중')
+    event.preventDefault();
+    console.log('OnSignSubmitHandler 실행')
 
-    Num == 1 && alert('Email 중복확인을 하세요.')
+    Num === 0 && alert('Email 중복확인을 하세요.')
+    if (Num === 2) {
+      alert('이미 사용중인 Email입니다.')
+      return
+    }
     password !== ConfirmPassword && alert("비밀번호가 서로 다릅니다.")
     if (email === '' || password === '' || ConfirmPassword ==='' || name === '' || birth === '' || major === '' || hobby === '') {
       alert('입력칸을 다 채우세요.')
@@ -96,7 +100,7 @@ function SignPage() {
 
           <input type="email" value={email} onChange={onEmailHandler} placeholder='Email' autoFocus />
 
-          <button style={style} onChange={checkEmail}>중복확인</button>
+          <button style={style} onClick={checkEmail}>중복확인</button>
 
           <input type="password" value={password} onChange={onPasswordHandler} placeholder='Password' /><br />
 
@@ -115,4 +119,5 @@ function SignPage() {
       </div>
   )
 }
+
 export default SignPage
