@@ -1,6 +1,6 @@
 package com.example.gongdewapplicationmaven.model;
 
-
+/*엔티티*/
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

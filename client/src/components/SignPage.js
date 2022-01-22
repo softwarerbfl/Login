@@ -51,7 +51,7 @@ function SignPage() {
     console.log('checkEmail 실행 중')
 
 
-    axios.post('/check/email', {email: email})
+    axios.post('/api/check/email', {email: email})
         .then((response) => {
           if (response.data === true) {
             alert('사용가능한 Email입니다.');
@@ -115,5 +115,4 @@ function SignPage() {
       </div>
   )
 }
-
 export default SignPage

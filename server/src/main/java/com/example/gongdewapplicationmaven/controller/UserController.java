@@ -1,5 +1,5 @@
 package com.example.gongdewapplicationmaven.controller;
-
+/*RestController(API 컨트롤러)*/
 
 import com.example.gongdewapplicationmaven.dto.UserForm;
 import com.example.gongdewapplicationmaven.model.User;
@@ -32,6 +32,7 @@ public class UserController {
                 ResponseEntity.status(HttpStatus.OK).body(created):
                 ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
     }
+    //로그인후 MyPage로 정보 전송
     @PostMapping("/api/login")
     public ResponseEntity<User> login(@RequestBody UserForm dto){
         log.info(dto.toString());
@@ -40,7 +41,8 @@ public class UserController {
                 ResponseEntity.status(HttpStatus.OK).body(login):
                 ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
     }
-    @PostMapping("/check/email")
+    //이메일 중복확인
+    @PostMapping("/api/check/email")
     public boolean duplication(@RequestBody UserForm dto){
         User duplicated = userService.duplicate(dto);
         return (duplicated != null) ?

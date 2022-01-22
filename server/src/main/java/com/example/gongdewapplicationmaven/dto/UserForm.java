@@ -1,5 +1,5 @@
 package com.example.gongdewapplicationmaven.dto;
-
+/*DTO객체*/
 import com.example.gongdewapplicationmaven.model.User;
 import lombok.AllArgsConstructor;
 import lombok.ToString;
