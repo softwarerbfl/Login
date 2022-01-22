@@ -8,7 +8,7 @@ function LoginPage() {
   const [isLogin, setIsLogin] = useState(false)
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
-  const [all, setAll] = useState([])
+  const [data, setData] = useState([])
 
   const onEmailHandler = (event) => {
     setEmail(event.currentTarget.value)
@@ -35,9 +35,9 @@ function LoginPage() {
     axios.post('/api/login', { email: email, password: password })
         .then((response) => {
           if (response.statusText === 'OK') {
-            alert('로그인에 성공했습니다.');
+            setData(response.data)
             setIsLogin(true)
-            setAll(response.data)
+            alert('로그인에 성공했습니다.');
           } else {
             alert('Email과 PW를 다시 확인해주세요.')
           }
@@ -66,7 +66,7 @@ function LoginPage() {
                   <button style={{ border: 0, fontSize: '15px', padding: '6px', width: '100%', cursor: 'pointer' }}>회원가입</button>
                 </Link>
               </form>
-            </div> : <MyPage all={all} />
+            </div> : <MyPage data={data} />
         }
       </div>
   )

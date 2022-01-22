@@ -48,17 +48,15 @@ function SignPage() {
   // Email 중복확인을 하는 함수(Onclick)
   const checkEmail = (event) => {
     event.preventDefault();
-    console.log('checkEmail 실행')
 
     axios.post('/api/check/email', {email: email})
         .then((response) => {
-          if (response.data === false) {
-            alert('사용가능한 Email입니다.');
+          if (response.data === true) {
             setNum(1)
-            console.log(setNum)
+            alert('사용가능한 Email입니다.');
           } else {
-            alert('이미 사용중인 Email입니다.');
             setNum(2)
+            alert('이미 사용중인 Email입니다.');
           }
         })
         .catch((error) => console.log(error))
@@ -66,14 +64,16 @@ function SignPage() {
 
   const OnSignSubmitHandler = (event) => {
     event.preventDefault();
-    console.log('OnSignSubmitHandler 실행')
 
-    Num === 0 && alert('Email 중복확인을 하세요.')
-    if (Num === 2) {
+    if (Num === 0) {
+      alert('Email 중복확인을 하세요.')
+    } else if (Num === 2) {
       alert('이미 사용중인 Email입니다.')
       return
     }
+
     password !== ConfirmPassword && alert("비밀번호가 서로 다릅니다.")
+
     if (email === '' || password === '' || ConfirmPassword ==='' || name === '' || birth === '' || major === '' || hobby === '') {
       alert('입력칸을 다 채우세요.')
     }

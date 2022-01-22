@@ -46,6 +46,6 @@ public class UserController {
     public boolean duplication(@RequestBody UserForm dto){
         User duplicated = userService.duplicate(dto);
         return (duplicated != null) ?
-                true: false;
+                false: true;
     }
 }
