@@ -8,7 +8,7 @@ function MyPage( {email} ) {
   console.log(email)
   // 사용자의 이메일 데이터를 이용해 화면에 띄우고자 하는 사용자 데이터를 가져온다.
   useEffect( () => {
-    axios.post('/user/getAll', {email: email})
+    axios.post('/users/getAll', {email: email})
       .then((response) => setInfos(response.data))
       .catch((error) => console.log(error))
   }, []);

@@ -70,7 +70,7 @@ function SignPage() {
     }
 
     // 서버에 사용자가 입력한 데이터 전송 후 회원가입이 완료되면 login하라는 경고창을 띄우고 login 페이지로 이동
-    axios.post("/user/add", {
+    axios.post("/api/users/create", {
       email: email, password: password, name: name, birth: birth, major: major, hobby: hobby
     })
       .then((response) => {

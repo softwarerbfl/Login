@@ -31,7 +31,7 @@ function LoginPage() {
     }
 
     // 사용자에게 받은 정보를 서버에게 보내고 로그인 성공 시 myPage 화면으로 이동
-    axios.post('/user/add', { email: email, password: password })
+    axios.post('/api/users/create', { email: email, password: password })
       .then((response) => {
         console.log(response)
         alert('로그인에 성공했습니다.');

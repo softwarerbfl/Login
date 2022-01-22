@@ -15,21 +15,22 @@ import javax.persistence.*;
 @Getter
 public class User {
     @Id
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
-//    private int id;
-//    @Column
-    private String userID; //이메일
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     @Column
-    private String userPassword;//비밀번호
+    private String email; //이메일
+    @Column
+    private String password;//비밀번호
     @Column
     private String name;//사용자 이름
     @Column
-    private String userBirth; //생일
+    private String birth; //생일
     @Column
-    private String userDepartment;//학과
+    private String major;//학과
     @Column
-    private String userHabit; //취미
-    public String getId() {
-        return userID;
+    private String hobby; //취미
+
+    public Long getId() {
+        return id;
     }
 }
