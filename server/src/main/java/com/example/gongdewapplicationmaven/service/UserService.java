@@ -43,6 +43,7 @@ public class UserService{
         }
         return login;
     }
+    //이메일 중복체크
     public User duplicate(UserForm dto){
         User user=dto.toEntity();
         User check = userRepository.checkDuplicaionByEmailAddress(user.getEmail());

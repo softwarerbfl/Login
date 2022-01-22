@@ -41,7 +41,7 @@ public class UserController {
                 ResponseEntity.status(HttpStatus.OK).body(login):
                 ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
     }
-    //이메일 중복확인
+    //이메일 중복확인-> 존재하면 true return, 비어있으면
     @PostMapping("/api/check/email")
     public boolean duplication(@RequestBody UserForm dto){
         User duplicated = userService.duplicate(dto);
