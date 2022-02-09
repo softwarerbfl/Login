@@ -1,10 +1,10 @@
 import React from 'react'
 
 
-function MyPage( {data} ) {
+function MyPage({ data }) {
 
     return (
-        <div style={{ position:'absolute', width:'100px', height:'100px', top:'18%', left:'40%' }}>
+        <div style={{ position: 'absolute', width: '200px', height: '100px', top: '22%', left: '40%' }}>
             <h2>MyPage</h2><br /><br />
 
             <h3>이름</h3>
